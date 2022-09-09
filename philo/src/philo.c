@@ -6,9 +6,13 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/08 21:08:40 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/09 14:04:11 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/philo.h"
+
+
 
 int	main(int argc, char **argv)
 {
@@ -16,6 +20,6 @@ int	main(int argc, char **argv)
 	{
 	}
 	else
-		printf("Wrong input parameters!\n");
+		wrong_input();
 	return (0);
 }
