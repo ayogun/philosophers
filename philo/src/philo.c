@@ -6,11 +6,15 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/11 22:00:48 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/11 22:54:30 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+
+
+
 
 int	ft_check(int argc, char **argv)
 {
@@ -37,16 +41,14 @@ int	ft_check(int argc, char **argv)
 
 
 int	main(int argc, char **argv)
-{
+{	
 	t_info	*info;
 	
 	if (argc == 5 || argc == 6)
 	{
-		int number_of_philo;
-		number_of_philo = ft_check(argc, argv);
-		if (number_of_philo < 1)
-			return (NULL);
-		info = malloc(sizeof(t_info) * 1);
+		info = ft_start(argc,argv);
+		if (info == NULL)
+			return (1);
 	}
 	else
 		wrong_input();
