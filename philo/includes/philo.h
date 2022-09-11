@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:05:09 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/11 22:05:04 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/11 23:01:12 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,20 @@
 
 typedef struct s_info
 {
-	struct s_data	*next;
+	struct s_info	*next;
+	int				total_philo;
+	int				*die;
+	int				*done;
+	int				philo_N;
+	pthread_mutex_t	*fork_l;
+	pthread_mutex_t	*fork_r;
+
 }				t_info;
 
 void wrong_input();
+t_info *ft_start(int argc, char **argv);
+int	ft_initialize_sub(t_info *data);
+int	ft_atoi(char *str);
+int	ft_check(int argc, char **argv);
 
 #endif
