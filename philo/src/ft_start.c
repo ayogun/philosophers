@@ -6,11 +6,36 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/11 23:02:01 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/13 18:46:55 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	ft_initialize_sub2(int argc, char **argv, t_info *data)
+{
+	t_info			*tmp;
+	t_info			*tmp2;
+
+	tmp2 = data;
+	// bu döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor.
+	while (tmp2)
+	{
+		tmp = tmp2->next;
+		tmp2->t2d = ft_atoi(argv[2]);
+		tmp2->t2e = ft_atoi(argv[3]);
+		tmp2->t2s = ft_atoi(argv[4]);
+		tmp2->t2em = 0;
+		if (argc == 6)
+			tmp2->t2em = ft_atoi(argv[5]);
+		if (tmp == NULL)
+			tmp2->fork_l = data->fork_r;
+		else
+			tmp2->fork_l = tmp->fork_r;
+		tmp2 = tmp2->next;
+	}
+	return (0);
+}
 
 int	ft_initialize_sub(t_info *data)
 {

@@ -6,15 +6,11 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/11 22:54:30 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/13 18:44:54 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-
-
-
 
 int	ft_check(int argc, char **argv)
 {
