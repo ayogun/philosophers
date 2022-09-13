@@ -6,19 +6,19 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/13 18:46:55 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/13 18:48:54 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor.
 int	ft_initialize_sub2(int argc, char **argv, t_info *data)
 {
 	t_info			*tmp;
 	t_info			*tmp2;
 
 	tmp2 = data;
-	// bu döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor.
 	while (tmp2)
 	{
 		tmp = tmp2->next;

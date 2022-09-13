@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:05:09 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/11 23:01:12 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/13 18:48:11 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct s_info
 	int				*die;
 	int				*done;
 	int				philo_N;
+	int				t2d;
+	int				t2e;
+	int				t2s;
+	int				t2em;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 
