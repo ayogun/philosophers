@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:05:09 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:29:04 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 13:30:57 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_info
 	int				t2e;
 	int				t2s;
 	int				t2em;
+	pthread_t		*tid;
 	pthread_mutex_t	*done_eat;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
