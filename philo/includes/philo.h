@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:05:09 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:33:08 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 13:37:49 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,11 @@ void	ft_thread(t_info *data);
 void	ft_thread_infinite(t_info *data);
 void	ft_thread_t2em(t_info *data);
 void	ft_thread_sub(t_info *data);
+void	ft_free(t_info *data);
+long unsigned int	ft_time(struct timeval *time);
+void	ft_printf(char *s, t_info *data);
+void	ft_sleep(int i);
+
+
 
 #endif
