@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 12:38:06 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 12:41:29 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,16 @@ t_info *ft_start(int argc, char **argv)
 		if (ft_initialize_sub(info))
 		{
 			free(info);
+			return (NULL);
+		}
+		if (ft_initialize_sub2(argc, argv, info))
+		{
+			ft_free(info);
+			return (NULL);
+		}
+		if (ft_initialize_sub3(info))
+		{
+			ft_free(info);
 			return (NULL);
 		}
 		return (info);
