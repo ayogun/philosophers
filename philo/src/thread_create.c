@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:28:13 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 13:30:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,31 @@ void	ft_thread(t_info *data)
 	else
 		ft_thread_infinite(data);
 }
+
+
+void	ft_thread_create(t_info *data, int	*done)
+{
+	t_info				*tmp;
+	struct timeval		*time1;
+
+	time1 = malloc(sizeof(struct timeval) * 1);
+	if (!time1 || gettimeofday(time1, 0) == -1)
+		return ;
+	tmp = data;
+	while (tmp)
+	{
+		tmp->done = done;
+		tmp->time = time1;
+		tmp->last_eat = malloc(sizeof(struct timeval) * 1);
+		if (!tmp->last_eat || gettimeofday(tmp->last_eat, 0) == -1)
+			return ;
+		tmp->tid = malloc(sizeof(pthread_t) * 1);
+		if (!tmp->tid)
+			return ;
+		if (pthread_create(tmp->tid, 0, (void *)&ft_thread, (void *)tmp))
+			return ;
+		tmp = tmp->next;
+	}
+	ft_sub_dead(data);
+}
+
