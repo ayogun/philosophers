@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 12:52:21 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 12:53:41 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_initialize_sub(t_info *data)
 
 	i = 0;
 	while (data->total_philo > i++)
-	
+	{
 		data->done = 0;
 		data->die = 0;
 		data->philo_N = i;
