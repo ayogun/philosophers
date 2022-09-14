@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:05:09 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:37:49 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 13:41:35 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,22 @@ typedef struct s_info
 
 }				t_info;
 
-void 	wrong_input();
-t_info 	*ft_start(int argc, char **argv);
-int		ft_initialize_sub(t_info *data);
-int		ft_initialize_sub2(int argc, char **argv, t_info *data);
-int		ft_initialize_sub3(t_info *data);
-int		ft_atoi(char *str);
-int		ft_check(int argc, char **argv);
-void	ft_thread_create(t_info *data, int	*done);
-void	ft_thread(t_info *data);
-void	ft_thread_infinite(t_info *data);
-void	ft_thread_t2em(t_info *data);
-void	ft_thread_sub(t_info *data);
-void	ft_free(t_info *data);
+void 				wrong_input();
+t_info 				*ft_start(int argc, char **argv);
+int					ft_initialize_sub(t_info *data);
+int					ft_initialize_sub2(int argc, char **argv, t_info *data);
+int					ft_initialize_sub3(t_info *data);
+int					ft_atoi(char *str);
+int					ft_check(int argc, char **argv);
+void				ft_thread_create(t_info *data, int	*done);
+void				ft_thread(t_info *data);
+void				ft_thread_infinite(t_info *data);
+void				ft_thread_t2em(t_info *data);
+void				ft_thread_sub(t_info *data);
+void				ft_free(t_info *data);
 long unsigned int	ft_time(struct timeval *time);
-void	ft_printf(char *s, t_info *data);
-void	ft_sleep(int i);
-
-
+void				ft_printf(char *s, t_info *data);
+void				ft_sleep(int i);
+void				ft_die(t_info *data);
 
 #endif

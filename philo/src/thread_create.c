@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:30:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 13:41:05 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ void	ft_thread_create(t_info *data, int	*done)
 			return ;
 		tmp = tmp->next;
 	}
-	ft_sub_dead(data);
+	ft_die(data);
 }
 
