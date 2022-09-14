@@ -6,11 +6,32 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/13 18:48:54 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 12:41:29 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+// last two data has been initialized.
+int	ft_initialize_sub3(t_info *data)
+{
+	pthread_mutex_t		*in;
+	pthread_mutex_t		*tmp;
+
+	in = malloc(sizeof(pthread_mutex_t) * 1);
+	if (!in || pthread_mutex_init(in, 0))
+		return (1);
+	tmp = malloc(sizeof(pthread_mutex_t) * 1);
+	if (!tmp || pthread_mutex_init(tmp, 0))
+		return (1);
+	while (data)
+	{
+		data->done_eat = tmp;
+		data->in = in;
+		data = data->next;
+	}
+	return (0);
+}
 
 	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor.
 int	ft_initialize_sub2(int argc, char **argv, t_info *data)
@@ -37,6 +58,7 @@ int	ft_initialize_sub2(int argc, char **argv, t_info *data)
 	return (0);
 }
 
+// bu fonksiyon right fork yaratmak için kullanılıyor. Filozof sayısı kadar olması için while döngüsü kullanılıyor.
 int	ft_initialize_sub(t_info *data)
 {
 	t_info				*tmp;
@@ -76,6 +98,16 @@ t_info *ft_start(int argc, char **argv)
 		if (ft_initialize_sub(info))
 		{
 			free(info);
+			return (NULL);
+		}
+		if (ft_initialize_sub2(argc, argv, info))
+		{
+			ft_free(info);
+			return (NULL);
+		}
+		if (ft_initialize_sub3(info))
+		{
+			ft_free(info);
 			return (NULL);
 		}
 		return (info);
