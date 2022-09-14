@@ -6,25 +6,25 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:41:05 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 20:56:56 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_thread_sub(t_info *data)
+void	ft_eat(t_data *data)
 {
 	if (*data->die)
 		return ;
 	pthread_mutex_lock(data->fork_r);
-	ft_printf("has taken a fork", data);
+	ft_printf("has taken a fork from his right side", data);
 	if (*data->die)
 	{
 		pthread_mutex_unlock(data->fork_r);
 		return ;
 	}
 	pthread_mutex_lock(data->fork_l);
-	ft_printf("has taken a fork", data);
+	ft_printf("has taken a fork from his left side", data);
 	if (gettimeofday(data->last_eat, 0))
 		return ;
 	if (*data->die)
@@ -39,11 +39,11 @@ void	ft_thread_sub(t_info *data)
 	pthread_mutex_unlock(data->fork_r);
 }
 
-void	ft_thread_t2em(t_info *data)
+void	ft_musteat(t_data *data)
 {
 	while (data->t2em)
 	{
-		ft_thread_sub(data);
+		ft_eat(data);
 		if (*data->die)
 			return ;
 		data->t2em--;
@@ -60,11 +60,11 @@ void	ft_thread_t2em(t_info *data)
 	}
 }
 
-void	ft_thread_infinite(t_info *data)
+void	ft_eat_forever(t_data *data)
 {
 	while (*data->die == 0)
 	{
-		ft_thread_sub(data);
+		ft_eat(data);
 		ft_printf("is sleeping", data);
 		if (*data->die)
 			return ;
@@ -73,20 +73,19 @@ void	ft_thread_infinite(t_info *data)
 	}
 }
 
-void	ft_thread(t_info *data)
+void	ft_thread(t_data *data)
 {
-	if (data->philo_N % 2 != 0)
+	if (data->phn % 2 != 0)
 		usleep(data->t2e * 100);
 	if (data->t2em)
-		ft_thread_t2em(data);
+		ft_musteat(data);
 	else
-		ft_thread_infinite(data);
+		ft_eat_forever(data);
 }
 
-
-void	ft_thread_create(t_info *data, int	*done)
+void	ft_thread_create(t_data *data, int	*done)
 {
-	t_info				*tmp;
+	t_data				*tmp;
 	struct timeval		*time1;
 
 	time1 = malloc(sizeof(struct timeval) * 1);
@@ -109,4 +108,3 @@ void	ft_thread_create(t_info *data, int	*done)
 	}
 	ft_die(data);
 }
-

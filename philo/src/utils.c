@@ -6,11 +6,35 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 13:38:06 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/14 20:59:05 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+
+void	ft_free(t_data *data)
+{
+	t_data	*tmp;
+
+	pthread_mutex_unlock(data->in);
+	pthread_mutex_destroy(data->in);
+	free(data->in);
+	pthread_mutex_destroy(data->done_eat);
+	free(data->done_eat);
+	free(data->time);
+	while (data)
+	{
+		pthread_join(*data->tid, 0);
+		tmp = data;
+		pthread_mutex_destroy(data->fork_r);
+		free(data->fork_r);
+		free(data->tid);
+		free(data->last_eat);
+		data = data->next;
+		free(tmp);
+	}
+}
 
 int	ft_atoi(char *str)
 {
@@ -41,29 +65,6 @@ int	ft_atoi(char *str)
 	return (mod * i);
 }
 
-void	ft_free(t_info *data)
-{
-	t_info	*tmp;
-
-	pthread_mutex_unlock(data->in);
-	pthread_mutex_destroy(data->in);
-	free(data->in);
-	pthread_mutex_destroy(data->done_eat);
-	free(data->done_eat);
-	free(data->time);
-	while (data)
-	{
-		pthread_join(*data->tid, 0);
-		tmp = data;
-		pthread_mutex_destroy(data->fork_r);
-		free(data->fork_r);
-		free(data->tid);
-		free(data->last_eat);
-		data = data->next;
-		free(tmp);
-	}
-}
-
 long unsigned int	ft_time(struct timeval *time)
 {
 	long unsigned int	i;
@@ -76,7 +77,7 @@ long unsigned int	ft_time(struct timeval *time)
 	return (i);
 }
 
-void	ft_printf(char *s, t_info *data)
+void	ft_printf(char *s, t_data *data)
 {
 	long int	i;
 
@@ -87,7 +88,7 @@ void	ft_printf(char *s, t_info *data)
 		pthread_mutex_unlock(data->in);
 		return ;
 	}
-	printf("%lums %i %s\n", i, data->philo_N, s);
+	printf("%lums - The philosoph number %i,  %s\n", i, data->phn, s);
 	pthread_mutex_unlock(data->in);
 }
 
