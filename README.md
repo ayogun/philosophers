@@ -19,3 +19,6 @@ When you're done eating, put down your fork.
 Not a single philosopher should die due to lack of food for a certain period of time.
 If all the philosophers were hungry and picked up the left forks at the same time, the right forks would have already been picked up by the philosopher sitting to their right, and everyone would be forever unable to hold the right forks. That is, there is no further progress, and the philosophers remain on standby forever. This phenomenon is called deadlock. Once in a `deadlock`, philosophers continue to suffer and die of starvation.
 The task is to implement a program that solves this problem using `mutex` or `semaphore`
+
+
+[http://web.eecs.utk.edu/~jplank/plank/classes/cs360/360/notes/Dphil/lecture.html](./img/odd-even.png)

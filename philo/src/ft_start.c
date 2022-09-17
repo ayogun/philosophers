@@ -6,12 +6,18 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:43:18 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/17 15:59:21 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+// This function make necessary checks for the given arguments.
+// If there is no negative numbers, it converts them to integer in first if condition.
+// Second if checks whether the optional argument is given and positive.
+// Third if checks if second parameter(time to die) is zero. If so, philosopher will die right away.
+// Last if checks if there is only 1 philosopher. In this condition he will also die right away since
+// there isn't enough fork on the table.
 int	ft_check(int argc, char **argv)
 {
 	if (ft_atoi(argv[2]) < 0 || ft_atoi(argv[3]) < 0 || ft_atoi(argv[4]) < 0
@@ -36,7 +42,7 @@ int	ft_check(int argc, char **argv)
 	return (ft_atoi(argv[1]));
 }
 
-	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor.
+	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor. Aynı zamanda bazı veriler initialize ediliyor.
 int	ft_initialize_sub2(int argc, char **argv, t_data *data)
 {
 	t_data			*tmp;
@@ -62,6 +68,7 @@ int	ft_initialize_sub2(int argc, char **argv, t_data *data)
 	return (0);
 }
 
+// create fork right as much as philo number create data set as the number of philosopher
 int	ft_initialize_sub(t_data *data, int k, int *die)
 {
 	t_data				*tmp;
@@ -89,6 +96,7 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 	return (0);
 }
 
+// Here created two mutexes.
 int	ft_initialize_sub3(t_data *data)
 {
 	pthread_mutex_t		*in;
@@ -109,6 +117,7 @@ int	ft_initialize_sub3(t_data *data)
 	return (0);
 }
 
+// this function is a main function where I call three other functions from above.
 t_data	*ft_initialize(int argc, char **argv, int *die)
 {
 	int		k;
