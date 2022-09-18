@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:59:05 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:16:37 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_printf(char *s, t_data *data)
 		pthread_mutex_unlock(data->in);
 		return ;
 	}
-	printf("%lums - The philosoph number %i,  %s\n", i, data->phn, s);
+	printf("%lums - The philosopher number %i,  %s\n", i, data->index_philo, s);
 	pthread_mutex_unlock(data->in);
 }
 

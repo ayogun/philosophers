@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/17 15:59:21 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 09:54:10 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	ft_initialize_sub2(int argc, char **argv, t_data *data)
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->t2d = ft_atoi(argv[2]);
-		tmp2->t2e = ft_atoi(argv[3]);
-		tmp2->t2s = ft_atoi(argv[4]);
-		tmp2->t2em = 0;
+		tmp2->dieTime = ft_atoi(argv[2]);
+		tmp2->eatTime = ft_atoi(argv[3]);
+		tmp2->sleepTime = ft_atoi(argv[4]);
+		tmp2->mustEat = 0;
 		if (argc == 6)
-			tmp2->t2em = ft_atoi(argv[5]);
+			tmp2->mustEat = ft_atoi(argv[5]);
 		if (tmp == NULL)
 			tmp2->fork_l = data->fork_r;
 		else
@@ -77,9 +77,9 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 	i = 0;
 	while (k > i++)
 	{
-		data->tot_ph = k;
+		data->total_philo = k;
 		data->die = die;
-		data->phn = i;
+		data->index_philo = i;
 		data->next = NULL;
 		data->fork_r = malloc(sizeof(pthread_mutex_t) * 1);
 	// filozof sayısı kadar mutex başlatılıyor , fork_r için

@@ -9,12 +9,12 @@
 
 typedef struct s_data
 {
-	int				phn;
-	int				tot_ph;
-	int				t2d;
-	int				t2e;
-	int				t2s;
-	int				t2em;
+	int				index_philo;
+	int				total_philo;
+	int				dieTime;
+	int				eatTime;
+	int				sleepTime;
+	int				mustEat;
 	int				*die;
 	int				*done;
 	pthread_t		*tid;

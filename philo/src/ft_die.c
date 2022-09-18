@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:40:00 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:48:15 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:17:20 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	ft_die(t_data *data)
 	long unsigned int	i;
 
 	tmp = data;
-	while (*data->done < data->tot_ph)
+	while (*data->done < data->total_philo)
 	{
 		j = ft_time(data->last_eat);
-		if (j >= data->t2d)
+		if (j >= data->dieTime)
 		{
 			*data->die = 1;
 			pthread_mutex_lock(data->in);
 			i = ft_time(data->time);
-			printf("%lums %i died!\n", i, data->phn);
+			printf("%lums - The philosopher number %i,  \033[31;1mdied!\033[0m 💀💀💀  \n", i, data->index_philo);
 			return ;
 		}
 		data = data->next;
