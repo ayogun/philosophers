@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:36:14 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // This function make necessary checks for the given arguments.
 // If there is no negative numbers, it converts them to integer in first if condition.
 // Second if checks whether the optional argument is given and positive.
-// Third if checks if second parameter(time to die) is zero. If so, philosopher will die right away.
-// Last if checks if there is only 1 philosopher. In this condition he will also die right away since
+// Third if checks if second parameter(time to did_die) is zero. If so, philosopher will did_die right away.
+// Last if checks if there is only 1 philosopher. In this condition he will also did_die right away since
 // there isn't enough fork on the table.
 int	ft_check(int argc, char **argv)
 {
@@ -30,30 +30,30 @@ int	ft_check(int argc, char **argv)
 		return (0);
 	if (ft_atoi(argv[1]) > 0 && ft_atoi(argv[2]) == 0)
 	{
-		printf("0ms 1 died!\n");
+		printf("0ms 1 did_died!\n");
 		return (0);
 	}
 	if (ft_atoi(argv[1]) == 1)
 	{
 		printf("0ms 1 has taken a fork\n");
-		printf("%ims 1 died!\n", ft_atoi(argv[2]));
+		printf("%ims 1 did_died!\n", ft_atoi(argv[2]));
 		return (0);
 	}
 	return (ft_atoi(argv[1]));
 }
 
 	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor. Aynı zamanda bazı veriler initialize ediliyor.
-int	ft_initialize_sub2(int argc, char **argv, t_data *data)
+int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 {
-	t_data			*tmp;
-	t_data			*tmp2;
+	philoData			*tmp;
+	philoData			*tmp2;
 
 	tmp2 = data;
 	// bu döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor.
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->dieTime = ft_atoi(argv[2]);
+		tmp2->did_dieTime = ft_atoi(argv[2]);
 		tmp2->eatTime = ft_atoi(argv[3]);
 		tmp2->sleepTime = ft_atoi(argv[4]);
 		tmp2->mustEat = 0;
@@ -69,16 +69,16 @@ int	ft_initialize_sub2(int argc, char **argv, t_data *data)
 }
 
 // create fork right as much as philo number create data set as the number of philosopher
-int	ft_initialize_sub(t_data *data, int k, int *die)
+int	ft_initialize_sub(philoData *data, int k, int *did_die)
 {
-	t_data				*tmp;
+	philoData				*tmp;
 	int					i;
 
 	i = 0;
 	while (k > i++)
 	{
 		data->total_philo = k;
-		data->die = die;
+		data->did_die = did_die;
 		data->index_philo = i;
 		data->next = NULL;
 		data->fork_r = malloc(sizeof(pthread_mutex_t) * 1);
@@ -87,7 +87,7 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 			return (1);
 		if (k == i)
 			break ;
-		tmp = malloc(sizeof(t_data) * 1);
+		tmp = malloc(sizeof(philoData) * 1);
 		if (!tmp)
 			return (1);
 		data->next = tmp;
@@ -97,7 +97,7 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 }
 
 // Here created two mutexes.
-int	ft_initialize_sub3(t_data *data)
+int	ft_initialize_sub3(philoData *data)
 {
 	pthread_mutex_t		*in;
 	pthread_mutex_t		*tmp;
@@ -118,18 +118,18 @@ int	ft_initialize_sub3(t_data *data)
 }
 
 // this function is a main function where I call three other functions from above.
-t_data	*ft_initialize(int argc, char **argv, int *die)
+philoData	*ft_initialize(int argc, char **argv, int *did_die)
 {
 	int		k;
-	t_data	*data;
+	philoData	*data;
 
 	k = ft_check(argc, argv);
 	if (k < 1)
 		return (NULL);
-	data = malloc(sizeof(t_data) * 1);
+	data = malloc(sizeof(philoData) * 1);
 	if (!data)
 		return (NULL);
-	if (ft_initialize_sub(data, k, die))
+	if (ft_initialize_sub(data, k, did_die))
 	{
 		ft_free(data);
 		return (NULL);

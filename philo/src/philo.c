@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:49:56 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
-	int		die;
+	philoData	*data;
+	int		did_die;
 	int		done;
 
 	if (argc == 5 || argc == 6)
 	{
-		die = 0;
+		did_die = 0;
 		done = 0;
-		data = ft_initialize(argc, argv, &die);
+		data = ft_initialize(argc, argv, &did_die);
 		if (data == NULL)
 			return (1);
 		ft_thread_create(data, &done);
