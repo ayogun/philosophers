@@ -6,18 +6,20 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 12:12:02 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// This function make necessary checks for the given arguments.
-// If there is no negative numbers, it converts them to integer in first if condition.
-// Second if checks whether the optional argument is given and positive.
-// Third if checks if second parameter(time to did_die) is zero. If so, philosopher will did_die right away.
-// Last if checks if there is only 1 philosopher. In this condition he will also did_die right away since
-// there isn't enough fork on the table.
+/*
+	This function make necessary checks for the given arguments.
+	If there is no negative numbers, it converts them to integer in first if condition.
+	Second if checks whether the optional argument is given and positive.
+	Third if checks if second parameter(time to did_die) is zero. If so, philosopher will did_die right away.
+	Last if checks if there is only 1 philosopher. In this condition he will also did_die right away since
+	there isn't enough fork on the table.
+*/
 int	ft_check(int argc, char **argv)
 {
 	if (ft_atoi(argv[2]) < 0 || ft_atoi(argv[3]) < 0 || ft_atoi(argv[4]) < 0
@@ -42,18 +44,24 @@ int	ft_check(int argc, char **argv)
 	return (ft_atoi(argv[1]));
 }
 
-	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor. Aynı zamanda bazı veriler initialize ediliyor.
+/*	
+	In this function, one while loop has been used to loop thorough philosophers
+	and tell introduce them leftFork. The methos of introducing them is;
+	the philosopher who sits next to you has a fork on his left hand side and
+	this fork will be your leftFork. This while loop turn around the table kind of
+	like clockwise. Besides of that some values has been initialized
+	while looping thorough philosophers.
+*/
 int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 {
 	philoData			*tmp;
 	philoData			*tmp2;
 
 	tmp2 = data;
-	// bu döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor.
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->did_dieTime = ft_atoi(argv[2]);
+		tmp2->dieTime = ft_atoi(argv[2]);
 		tmp2->eatTime = ft_atoi(argv[3]);
 		tmp2->sleepTime = ft_atoi(argv[4]);
 		tmp2->mustEat = 0;
@@ -68,7 +76,12 @@ int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 	return (0);
 }
 
-// create fork right as much as philo number create data set as the number of philosopher
+/*
+	This function creates rightFork as much as the philosopher number. 
+	The rightFork has been created as a mutex since it will be a shared
+	resource. Besides of that some values has been initialized
+	while looping thorough philosophers.
+*/
 int	ft_initialize_sub(philoData *data, int k, int *did_die)
 {
 	philoData				*tmp;
@@ -82,7 +95,6 @@ int	ft_initialize_sub(philoData *data, int k, int *did_die)
 		data->index_philo = i;
 		data->next = NULL;
 		data->fork_r = malloc(sizeof(pthread_mutex_t) * 1);
-	// filozof sayısı kadar mutex başlatılıyor , fork_r için
 		if (!data->fork_r || pthread_mutex_init(data->fork_r, 0))
 			return (1);
 		if (k == i)
@@ -96,14 +108,24 @@ int	ft_initialize_sub(philoData *data, int k, int *did_die)
 	return (0);
 }
 
-// Here created two mutexes.
+/* 
+	In this function, two mutex have been created.
+	One is for tmp pointer to carry the funeral pointer
+	to the next node. On the other hand, funeral pointer
+	points the funeral mutex. It is created as mutex because
+	it will be shared in between philosophers. Philosophers
+	use it stop the program and tell the others that there
+	is going to be a funeral and stop working. Without him
+	there would be a data race and some messages still would
+	be printed out to the terminal after somebody died.
+*/
 int	ft_initialize_sub3(philoData *data)
 {
-	pthread_mutex_t		*in;
+	pthread_mutex_t		*funeral;
 	pthread_mutex_t		*tmp;
 
-	in = malloc(sizeof(pthread_mutex_t) * 1);
-	if (!in || pthread_mutex_init(in, 0))
+	funeral = malloc(sizeof(pthread_mutex_t) * 1);
+	if (!funeral || pthread_mutex_init(funeral, 0))
 		return (1);
 	tmp = malloc(sizeof(pthread_mutex_t) * 1);
 	if (!tmp || pthread_mutex_init(tmp, 0))
@@ -111,14 +133,18 @@ int	ft_initialize_sub3(philoData *data)
 	while (data)
 	{
 		data->done_eat = tmp;
-		data->funeral = in;
+		data->funeral = funeral;
 		data = data->next;
 	}
 	return (0);
 }
 
-// this function is a main function where I call three other functions from above.
-philoData	*ft_initialize(int argc, char **argv, int *did_die)
+/*
+	This function is a main function where I call three other 
+	functions from above. The reason of that is to follow dictated
+	42 norms.
+*/
+philoData	*ft_start(int argc, char **argv, int *did_die)
 {
 	int		k;
 	philoData	*data;

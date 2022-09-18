@@ -6,12 +6,18 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 12:10:51 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+/*
+	This function locks the forkRight and forkLeft mutexes.
+	After philosopher picked up both of the forks, he prints out
+	eating message and then eats(ft_sleep) as long as it has defined
+	by user and used in this program as eatTime.
+*/
 void	ft_eat(philoData *data)
 {
 	if (*data->did_die)
@@ -39,6 +45,16 @@ void	ft_eat(philoData *data)
 	pthread_mutex_unlock(data->fork_r);
 }
 
+/*
+	This function works while the mustEat value is greater 
+	than zero. Hence, we make sure that each philosopher eats
+	as much as mustEat parameters  which is given by user as 
+	optional parameter. Whenever this value reaches the zero,
+	we lock the done_eat mutex and increase it by one. Done
+	vakue is initialized with zero and every philosopher increase
+	it only once wheen they are done with eating. In the final moment,
+	the done value will be equal to the total number of philosophers.
+*/
 void	ft_musteat(philoData *data)
 {
 	while (data->mustEat)
@@ -60,6 +76,12 @@ void	ft_musteat(philoData *data)
 	}
 }
 
+/*
+	This function works forever as the name specifies. Unless
+	one of philosophers die out of hunger. In other words, whenever
+	one of the philosophers' did_die value become 1. In this case,
+	while loop stops and function ends with void return.
+*/
 void	ft_eat_forever(philoData *data)
 {
 	while (*data->did_die == 0)
@@ -73,6 +95,21 @@ void	ft_eat_forever(philoData *data)
 	}
 }
 
+/*
+	This function is the place where ODD/EVEN solution
+	has been used in order to solve the philosophers
+	problem. It checks whether pihlosopher number is odd
+	or even. If it is odd, philosopher is being slept as
+	much as eatTime. Why? Because the reason, we try to
+	create enough time for even number philosophers to
+	complete eating. When even numbers completed eating,
+	odd numbers will continue to thread and forks will be
+	free since even numbers have already completed eating
+	and put back the forks on the table. By this way, now 
+	even numbers will be able to pick up free forks and 
+	eat their meal in peace.
+	
+*/
 void	ft_thread(philoData *data)
 {
 	if (data->index_philo % 2 != 0)
@@ -83,10 +120,15 @@ void	ft_thread(philoData *data)
 		ft_eat_forever(data);
 }
 
+/*
+	This function initialize some values and timeval structs.
+	But most importantly, here in this function we create 
+	threads as many as the total number of philosophers.
+*/
 void	ft_thread_create(philoData *data, int	*done)
 {
 	philoData				*tmp;
-	struct timeval		*time1;
+	struct timeval			*time1;
 
 	time1 = malloc(sizeof(struct timeval) * 1);
 	if (!time1 || gettimeofday(time1, 0) == -1)
@@ -106,5 +148,5 @@ void	ft_thread_create(philoData *data, int	*done)
 			return ;
 		tmp = tmp->next;
 	}
-	ft_did_die(data);
+	ft_die(data);
 }

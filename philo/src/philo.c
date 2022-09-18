@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 12:12:10 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	{
 		did_die = 0;
 		done = 0;
-		data = ft_initialize(argc, argv, &did_die);
+		data = ft_start(argc, argv, &did_die);
 		if (data == NULL)
 			return (1);
 		ft_thread_create(data, &done);
