@@ -19,6 +19,7 @@
 	Whenever a philosopher's last_eat time become bigger than dieTime,
 	it means our philosopher died out of starving. In this case,
 	we lock our funeral mutex for other philosophers not to race to die.
+	We lock the funeral mutex in printf function.
 */
 void	ft_die(philoData *data)
 {
@@ -33,7 +34,6 @@ void	ft_die(philoData *data)
 		if (j >= data->dieTime)
 		{
 			*data->did_die = 1;
-			pthread_mutex_lock(data->funeral);
 			i = ft_time(data->time);
 			printf("%lums - The philosopher number %i,  \033[31;1mdid_died!\033[0m 💀💀💀  \n", i, data->index_philo);
 			return ;
