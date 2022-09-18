@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 11:16:30 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 12:12:02 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int	ft_initialize_sub3(philoData *data)
 	functions from above. The reason of that is to follow dictated
 	42 norms.
 */
-philoData	*ft_initialize(int argc, char **argv, int *did_die)
+philoData	*ft_start(int argc, char **argv, int *did_die)
 {
 	int		k;
 	philoData	*data;
