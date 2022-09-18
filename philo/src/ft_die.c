@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_die.c                                           :+:      :+:    :+:   */
+/*   ft_did_die.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../includes/philo.h"
 
-void	ft_die(philoData *data)
+void	ft_did_die(philoData *data)
 {
 	philoData				*tmp;
 	int					j;
@@ -22,12 +22,12 @@ void	ft_die(philoData *data)
 	while (*data->done < data->total_philo)
 	{
 		j = ft_time(data->last_eat);
-		if (j >= data->dieTime)
+		if (j >= data->did_dieTime)
 		{
-			*data->die = 1;
+			*data->did_die = 1;
 			pthread_mutex_lock(data->funeral);
 			i = ft_time(data->time);
-			printf("%lums - The philosopher number %i,  \033[31;1mdied!\033[0m 💀💀💀  \n", i, data->index_philo);
+			printf("%lums - The philosopher number %i,  \033[31;1mdid_died!\033[0m 💀💀💀  \n", i, data->index_philo);
 			return ;
 		}
 		data = data->next;

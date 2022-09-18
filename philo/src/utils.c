@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_printf(char *s, philoData *data)
 
 	pthread_mutex_lock(data->funeral);
 	i = ft_time(data->time);
-	if (*data->die)
+	if (*data->did_die)
 	{
 		pthread_mutex_unlock(data->funeral);
 		return ;

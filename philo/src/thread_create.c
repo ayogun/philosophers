@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_eat(philoData *data)
 {
-	if (*data->die)
+	if (*data->did_die)
 		return ;
 	pthread_mutex_lock(data->fork_r);
 	ft_printf("\033[1;30mhas taken a fork\033[0m 🍴(from his right side)", data);
-	if (*data->die)
+	if (*data->did_die)
 	{
 		pthread_mutex_unlock(data->fork_r);
 		return ;
@@ -27,7 +27,7 @@ void	ft_eat(philoData *data)
 	ft_printf("\033[1;30mhas taken a fork\033[0m 🍴(from his left side)", data);
 	if (gettimeofday(data->last_eat, 0))
 		return ;
-	if (*data->die)
+	if (*data->did_die)
 	{
 		pthread_mutex_unlock(data->fork_l);
 		pthread_mutex_unlock(data->fork_r);
@@ -44,7 +44,7 @@ void	ft_musteat(philoData *data)
 	while (data->mustEat)
 	{
 		ft_eat(data);
-		if (*data->die)
+		if (*data->did_die)
 			return ;
 		data->mustEat--;
 		if (data->mustEat == 0)
@@ -62,11 +62,11 @@ void	ft_musteat(philoData *data)
 
 void	ft_eat_forever(philoData *data)
 {
-	while (*data->die == 0)
+	while (*data->did_die == 0)
 	{
 		ft_eat(data);
 		ft_printf("\033[34;1mis sleeping\033[0m 😴", data);
-		if (*data->die)
+		if (*data->did_die)
 			return ;
 		ft_sleep(data->sleepTime);
 		ft_printf("\033[0;33mis thinking\033[0m 🤔", data);
@@ -106,5 +106,5 @@ void	ft_thread_create(philoData *data, int	*done)
 			return ;
 		tmp = tmp->next;
 	}
-	ft_die(data);
+	ft_did_die(data);
 }

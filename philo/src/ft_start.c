@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 // This function make necessary checks for the given arguments.
 // If there is no negative numbers, it converts them to integer in first if condition.
 // Second if checks whether the optional argument is given and positive.
-// Third if checks if second parameter(time to die) is zero. If so, philosopher will die right away.
-// Last if checks if there is only 1 philosopher. In this condition he will also die right away since
+// Third if checks if second parameter(time to did_die) is zero. If so, philosopher will did_die right away.
+// Last if checks if there is only 1 philosopher. In this condition he will also did_die right away since
 // there isn't enough fork on the table.
 int	ft_check(int argc, char **argv)
 {
@@ -30,13 +30,13 @@ int	ft_check(int argc, char **argv)
 		return (0);
 	if (ft_atoi(argv[1]) > 0 && ft_atoi(argv[2]) == 0)
 	{
-		printf("0ms 1 died!\n");
+		printf("0ms 1 did_died!\n");
 		return (0);
 	}
 	if (ft_atoi(argv[1]) == 1)
 	{
 		printf("0ms 1 has taken a fork\n");
-		printf("%ims 1 died!\n", ft_atoi(argv[2]));
+		printf("%ims 1 did_died!\n", ft_atoi(argv[2]));
 		return (0);
 	}
 	return (ft_atoi(argv[1]));
@@ -53,7 +53,7 @@ int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->dieTime = ft_atoi(argv[2]);
+		tmp2->did_dieTime = ft_atoi(argv[2]);
 		tmp2->eatTime = ft_atoi(argv[3]);
 		tmp2->sleepTime = ft_atoi(argv[4]);
 		tmp2->mustEat = 0;
@@ -69,7 +69,7 @@ int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 }
 
 // create fork right as much as philo number create data set as the number of philosopher
-int	ft_initialize_sub(philoData *data, int k, int *die)
+int	ft_initialize_sub(philoData *data, int k, int *did_die)
 {
 	philoData				*tmp;
 	int					i;
@@ -78,7 +78,7 @@ int	ft_initialize_sub(philoData *data, int k, int *die)
 	while (k > i++)
 	{
 		data->total_philo = k;
-		data->die = die;
+		data->did_die = did_die;
 		data->index_philo = i;
 		data->next = NULL;
 		data->fork_r = malloc(sizeof(pthread_mutex_t) * 1);
@@ -118,7 +118,7 @@ int	ft_initialize_sub3(philoData *data)
 }
 
 // this function is a main function where I call three other functions from above.
-philoData	*ft_initialize(int argc, char **argv, int *die)
+philoData	*ft_initialize(int argc, char **argv, int *did_die)
 {
 	int		k;
 	philoData	*data;
@@ -129,7 +129,7 @@ philoData	*ft_initialize(int argc, char **argv, int *die)
 	data = malloc(sizeof(philoData) * 1);
 	if (!data)
 		return (NULL);
-	if (ft_initialize_sub(data, k, die))
+	if (ft_initialize_sub(data, k, did_die))
 	{
 		ft_free(data);
 		return (NULL);

@@ -19,11 +19,11 @@ typedef struct s_data
 	struct s_data	*next;
 	int				index_philo;
 	int				total_philo;
-	int				dieTime;
+	int				did_dieTime;
 	int				eatTime;
 	int				sleepTime;
 	int				mustEat;
-	int				*die;
+	int				*did_die;
 	int				*done;
 }					philoData;
 
@@ -32,10 +32,10 @@ void				ft_free(philoData *data);
 void				ft_printf(char *s, philoData *data);
 void				ft_sleep(int i);
 int					ft_atoi(char *str);
-philoData				*ft_initialize(int argc, char **argv, int *die);
+philoData				*ft_initialize(int argc, char **argv, int *did_die);
 long unsigned int	ft_time(struct timeval *time);
 void				wrong_input();
-void				ft_die(philoData *data);
+void				ft_did_die(philoData *data);
 void				ft_thread_create(philoData *data, int	*done);
 
 
