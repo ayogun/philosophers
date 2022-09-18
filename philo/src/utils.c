@@ -6,16 +6,16 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:36:39 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
 
-void	ft_free(t_data *data)
+void	ft_free(philoData *data)
 {
-	t_data	*tmp;
+	philoData	*tmp;
 
 	pthread_mutex_unlock(data->funeral);
 	pthread_mutex_destroy(data->funeral);
@@ -77,7 +77,7 @@ long unsigned int	ft_time(struct timeval *time)
 	return (i);
 }
 
-void	ft_printf(char *s, t_data *data)
+void	ft_printf(char *s, philoData *data)
 {
 	long int	i;
 

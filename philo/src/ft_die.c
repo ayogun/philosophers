@@ -6,15 +6,15 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:40:00 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:36:02 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_die(t_data *data)
+void	ft_die(philoData *data)
 {
-	t_data				*tmp;
+	philoData				*tmp;
 	int					j;
 	long unsigned int	i;
 

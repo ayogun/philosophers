@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:36:14 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	ft_check(int argc, char **argv)
 }
 
 	// Bu fonksiyonun içindeki döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor. Sağ ve sol çatallar hayali olarak tanıtılıyor. Aynı zamanda bazı veriler initialize ediliyor.
-int	ft_initialize_sub2(int argc, char **argv, t_data *data)
+int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 {
-	t_data			*tmp;
-	t_data			*tmp2;
+	philoData			*tmp;
+	philoData			*tmp2;
 
 	tmp2 = data;
 	// bu döngüde saat yönünde tek tek filozoflar dönülüyor. Ve her birisinin çatal atamaları yapılıyor.
@@ -69,9 +69,9 @@ int	ft_initialize_sub2(int argc, char **argv, t_data *data)
 }
 
 // create fork right as much as philo number create data set as the number of philosopher
-int	ft_initialize_sub(t_data *data, int k, int *die)
+int	ft_initialize_sub(philoData *data, int k, int *die)
 {
-	t_data				*tmp;
+	philoData				*tmp;
 	int					i;
 
 	i = 0;
@@ -87,7 +87,7 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 			return (1);
 		if (k == i)
 			break ;
-		tmp = malloc(sizeof(t_data) * 1);
+		tmp = malloc(sizeof(philoData) * 1);
 		if (!tmp)
 			return (1);
 		data->next = tmp;
@@ -97,7 +97,7 @@ int	ft_initialize_sub(t_data *data, int k, int *die)
 }
 
 // Here created two mutexes.
-int	ft_initialize_sub3(t_data *data)
+int	ft_initialize_sub3(philoData *data)
 {
 	pthread_mutex_t		*in;
 	pthread_mutex_t		*tmp;
@@ -118,15 +118,15 @@ int	ft_initialize_sub3(t_data *data)
 }
 
 // this function is a main function where I call three other functions from above.
-t_data	*ft_initialize(int argc, char **argv, int *die)
+philoData	*ft_initialize(int argc, char **argv, int *die)
 {
 	int		k;
-	t_data	*data;
+	philoData	*data;
 
 	k = ft_check(argc, argv);
 	if (k < 1)
 		return (NULL);
-	data = malloc(sizeof(t_data) * 1);
+	data = malloc(sizeof(philoData) * 1);
 	if (!data)
 		return (NULL);
 	if (ft_initialize_sub(data, k, die))

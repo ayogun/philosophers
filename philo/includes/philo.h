@@ -9,14 +9,6 @@
 
 typedef struct s_data
 {
-	int				index_philo;
-	int				total_philo;
-	int				dieTime;
-	int				eatTime;
-	int				sleepTime;
-	int				mustEat;
-	int				*die;
-	int				*done;
 	pthread_t		*tid;
 	pthread_mutex_t	*done_eat;
 	pthread_mutex_t	*fork_l;
@@ -25,18 +17,26 @@ typedef struct s_data
 	struct timeval	*last_eat;
 	struct timeval	*time;
 	struct s_data	*next;
-}					t_data;
+	int				index_philo;
+	int				total_philo;
+	int				dieTime;
+	int				eatTime;
+	int				sleepTime;
+	int				mustEat;
+	int				*die;
+	int				*done;
+}					philoData;
 
-void				ft_thread(t_data *data);
-void				ft_free(t_data *data);
-void				ft_printf(char *s, t_data *data);
+void				ft_thread(philoData *data);
+void				ft_free(philoData *data);
+void				ft_printf(char *s, philoData *data);
 void				ft_sleep(int i);
 int					ft_atoi(char *str);
-t_data				*ft_initialize(int argc, char **argv, int *die);
+philoData				*ft_initialize(int argc, char **argv, int *die);
 long unsigned int	ft_time(struct timeval *time);
 void				wrong_input();
-void				ft_die(t_data *data);
-void				ft_thread_create(t_data *data, int	*done);
+void				ft_die(philoData *data);
+void				ft_thread_create(philoData *data, int	*done);
 
 
 #endif

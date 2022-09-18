@@ -6,13 +6,13 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:15:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:45:44 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_eat(t_data *data)
+void	ft_eat(philoData *data)
 {
 	if (*data->die)
 		return ;
@@ -39,7 +39,7 @@ void	ft_eat(t_data *data)
 	pthread_mutex_unlock(data->fork_r);
 }
 
-void	ft_musteat(t_data *data)
+void	ft_musteat(philoData *data)
 {
 	while (data->mustEat)
 	{
@@ -60,7 +60,7 @@ void	ft_musteat(t_data *data)
 	}
 }
 
-void	ft_eat_forever(t_data *data)
+void	ft_eat_forever(philoData *data)
 {
 	while (*data->die == 0)
 	{
@@ -73,7 +73,7 @@ void	ft_eat_forever(t_data *data)
 	}
 }
 
-void	ft_thread(t_data *data)
+void	ft_thread(philoData *data)
 {
 	if (data->index_philo % 2 != 0)
 		usleep(data->eatTime * 100);
@@ -83,9 +83,9 @@ void	ft_thread(t_data *data)
 		ft_eat_forever(data);
 }
 
-void	ft_thread_create(t_data *data, int	*done)
+void	ft_thread_create(philoData *data, int	*done)
 {
-	t_data				*tmp;
+	philoData				*tmp;
 	struct timeval		*time1;
 
 	time1 = malloc(sizeof(struct timeval) * 1);
