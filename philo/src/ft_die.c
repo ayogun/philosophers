@@ -12,6 +12,9 @@
 
 #include "../includes/philo.h"
 
+/*
+	This function loop thorough all the philosophers 
+*/
 void	ft_die(philoData *data)
 {
 	philoData				*tmp;
@@ -22,7 +25,7 @@ void	ft_die(philoData *data)
 	while (*data->done < data->total_philo)
 	{
 		j = ft_time(data->last_eat);
-		if (j >= data->did_dieTime)
+		if (j >= data->dieTime)
 		{
 			*data->did_die = 1;
 			pthread_mutex_lock(data->funeral);

@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 11:12:28 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 11:16:30 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->did_dieTime = ft_atoi(argv[2]);
+		tmp2->dieTime = ft_atoi(argv[2]);
 		tmp2->eatTime = ft_atoi(argv[3]);
 		tmp2->sleepTime = ft_atoi(argv[4]);
 		tmp2->mustEat = 0;

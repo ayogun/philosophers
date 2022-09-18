@@ -19,7 +19,7 @@ typedef struct s_data
 	struct s_data	*next;
 	int				index_philo;
 	int				total_philo;
-	int				did_dieTime;
+	int				dieTime;
 	int				eatTime;
 	int				sleepTime;
 	int				mustEat;
