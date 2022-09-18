@@ -13,7 +13,12 @@
 #include "../includes/philo.h"
 
 /*
-	This function loop thorough all the philosophers 
+	This function loop thorough all the philosophers infinitely
+	unless fifth parameter has given. In this case it will loop
+	thorough untill philosophers complete their total mustEat times.
+	Whenever a philosopher's last_eat time become bigger than dieTime,
+	it means our philosopher died out of starving. In this case,
+	we lock our funeral mutex for other philosophers not to race to die.
 */
 void	ft_die(philoData *data)
 {

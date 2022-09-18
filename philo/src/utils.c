@@ -6,12 +6,11 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:48:16 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 11:27:49 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
 
 void	ft_free(philoData *data)
 {
