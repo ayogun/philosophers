@@ -9,19 +9,19 @@
 
 typedef struct s_data
 {
-	int				phn;
-	int				tot_ph;
-	int				t2d;
-	int				t2e;
-	int				t2s;
-	int				t2em;
+	int				index_philo;
+	int				total_philo;
+	int				dieTime;
+	int				eatTime;
+	int				sleepTime;
+	int				mustEat;
 	int				*die;
 	int				*done;
 	pthread_t		*tid;
 	pthread_mutex_t	*done_eat;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*in;
+	pthread_mutex_t	*funeral;
 	struct timeval	*last_eat;
 	struct timeval	*time;
 	struct s_data	*next;

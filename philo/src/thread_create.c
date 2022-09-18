@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:56:56 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:15:16 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	ft_eat(t_data *data)
 	if (*data->die)
 		return ;
 	pthread_mutex_lock(data->fork_r);
-	ft_printf("has taken a fork from his right side", data);
+	ft_printf("\033[1;30mhas taken a fork\033[0m 🍴(from his right side)", data);
 	if (*data->die)
 	{
 		pthread_mutex_unlock(data->fork_r);
 		return ;
 	}
 	pthread_mutex_lock(data->fork_l);
-	ft_printf("has taken a fork from his left side", data);
+	ft_printf("\033[1;30mhas taken a fork\033[0m 🍴(from his left side)", data);
 	if (gettimeofday(data->last_eat, 0))
 		return ;
 	if (*data->die)
@@ -33,30 +33,30 @@ void	ft_eat(t_data *data)
 		pthread_mutex_unlock(data->fork_r);
 		return ;
 	}
-	ft_printf("is eating", data);
-	ft_sleep(data->t2e);
+	ft_printf("\033[0;32mis eating\033[0m 🍔", data);
+	ft_sleep(data->eatTime);
 	pthread_mutex_unlock(data->fork_l);
 	pthread_mutex_unlock(data->fork_r);
 }
 
 void	ft_musteat(t_data *data)
 {
-	while (data->t2em)
+	while (data->mustEat)
 	{
 		ft_eat(data);
 		if (*data->die)
 			return ;
-		data->t2em--;
-		if (data->t2em == 0)
+		data->mustEat--;
+		if (data->mustEat == 0)
 		{
 			pthread_mutex_lock(data->done_eat);
 			*data->done += 1;
 			pthread_mutex_unlock(data->done_eat);
 			return ;
 		}
-		ft_printf("is sleeping", data);
-		ft_sleep(data->t2s);
-		ft_printf("is thinking", data);
+		ft_printf("\033[34;1mis sleeping\033[0m 😴", data);
+		ft_sleep(data->sleepTime);
+		ft_printf("\033[0;33mis thinking\033[0m 🤔", data);
 	}
 }
 
@@ -65,19 +65,19 @@ void	ft_eat_forever(t_data *data)
 	while (*data->die == 0)
 	{
 		ft_eat(data);
-		ft_printf("is sleeping", data);
+		ft_printf("\033[34;1mis sleeping\033[0m 😴", data);
 		if (*data->die)
 			return ;
-		ft_sleep(data->t2s);
-		ft_printf("is thinking", data);
+		ft_sleep(data->sleepTime);
+		ft_printf("\033[0;33mis thinking\033[0m 🤔", data);
 	}
 }
 
 void	ft_thread(t_data *data)
 {
-	if (data->phn % 2 != 0)
-		usleep(data->t2e * 100);
-	if (data->t2em)
+	if (data->index_philo % 2 != 0)
+		usleep(data->eatTime * 100);
+	if (data->mustEat)
 		ft_musteat(data);
 	else
 		ft_eat_forever(data);

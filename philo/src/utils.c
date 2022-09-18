@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/14 20:59:05 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:36:39 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_free(t_data *data)
 {
 	t_data	*tmp;
 
-	pthread_mutex_unlock(data->in);
-	pthread_mutex_destroy(data->in);
-	free(data->in);
+	pthread_mutex_unlock(data->funeral);
+	pthread_mutex_destroy(data->funeral);
+	free(data->funeral);
 	pthread_mutex_destroy(data->done_eat);
 	free(data->done_eat);
 	free(data->time);
@@ -81,15 +81,15 @@ void	ft_printf(char *s, t_data *data)
 {
 	long int	i;
 
-	pthread_mutex_lock(data->in);
+	pthread_mutex_lock(data->funeral);
 	i = ft_time(data->time);
 	if (*data->die)
 	{
-		pthread_mutex_unlock(data->in);
+		pthread_mutex_unlock(data->funeral);
 		return ;
 	}
-	printf("%lums - The philosoph number %i,  %s\n", i, data->phn, s);
-	pthread_mutex_unlock(data->in);
+	printf("%lums - The philosopher number %i,  %s\n", i, data->index_philo, s);
+	pthread_mutex_unlock(data->funeral);
 }
 
 void	ft_sleep(int i)
