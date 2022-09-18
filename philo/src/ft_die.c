@@ -12,7 +12,7 @@
 
 #include "../includes/philo.h"
 
-void	ft_did_die(philoData *data)
+void	ft_die(philoData *data)
 {
 	philoData				*tmp;
 	int					j;

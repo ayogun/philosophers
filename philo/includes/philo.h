@@ -32,10 +32,10 @@ void				ft_free(philoData *data);
 void				ft_printf(char *s, philoData *data);
 void				ft_sleep(int i);
 int					ft_atoi(char *str);
-philoData				*ft_initialize(int argc, char **argv, int *did_die);
+philoData			*ft_initialize(int argc, char **argv, int *did_die);
 long unsigned int	ft_time(struct timeval *time);
 void				wrong_input();
-void				ft_did_die(philoData *data);
+void				ft_die(philoData *data);
 void				ft_thread_create(philoData *data, int	*done);
 
 
