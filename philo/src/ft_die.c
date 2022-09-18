@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:40:00 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 10:17:20 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:36:02 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_die(t_data *data)
 		if (j >= data->dieTime)
 		{
 			*data->die = 1;
-			pthread_mutex_lock(data->in);
+			pthread_mutex_lock(data->funeral);
 			i = ft_time(data->time);
 			printf("%lums - The philosopher number %i,  \033[31;1mdied!\033[0m 💀💀💀  \n", i, data->index_philo);
 			return ;

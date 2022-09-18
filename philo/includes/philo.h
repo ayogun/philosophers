@@ -21,7 +21,7 @@ typedef struct s_data
 	pthread_mutex_t	*done_eat;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*in;
+	pthread_mutex_t	*funeral;
 	struct timeval	*last_eat;
 	struct timeval	*time;
 	struct s_data	*next;

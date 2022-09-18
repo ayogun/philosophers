@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 09:54:10 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/18 10:36:14 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	ft_initialize_sub3(t_data *data)
 	while (data)
 	{
 		data->done_eat = tmp;
-		data->in = in;
+		data->funeral = in;
 		data = data->next;
 	}
 	return (0);
