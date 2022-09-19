@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 21:04:51 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 12:12:10 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/19 18:47:31 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	philoData	*data;
-	int		did_die;
-	int		done;
+	t_phi_data	*data;
+	int			did_die;
+	int			done;
 
 	if (argc == 5 || argc == 6)
 	{

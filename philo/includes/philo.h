@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/19 18:46:02 by yogun             #+#    #+#             */
+/*   Updated: 2022/09/19 18:49:30 by yogun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -17,26 +29,25 @@ typedef struct s_data
 	struct timeval	*last_eat;
 	struct timeval	*time;
 	struct s_data	*next;
-	int				index_philo;
+	int				index;
 	int				total_philo;
-	int				dieTime;
-	int				eatTime;
-	int				sleepTime;
-	int				mustEat;
+	int				die_time;
+	int				eat_time;
+	int				sleep_time;
+	int				must_eat;
 	int				*did_die;
 	int				*done;
-}					philoData;
+}					t_phi_data;
 
-void				ft_thread(philoData *data);
-void				ft_free(philoData *data);
-void				ft_printf(char *s, philoData *data);
+void				ft_thread(t_phi_data *data);
+void				ft_free(t_phi_data *data);
+void				ft_printf(char *s, t_phi_data *data);
 void				ft_sleep(int i);
 int					ft_atoi(char *str);
-philoData			*ft_start(int argc, char **argv, int *did_die);
+t_phi_data			*ft_start(int argc, char **argv, int *did_die);
 long unsigned int	ft_time(struct timeval *time);
-void				wrong_input();
-void				ft_die(philoData *data);
-void				ft_thread_create(philoData *data, int	*done);
-
+void				wrong_input(void);
+void				ft_die(t_phi_data *data);
+void				ft_thread_create(t_phi_data *data, int	*done);
 
 #endif
