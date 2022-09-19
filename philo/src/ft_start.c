@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:49:38 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 12:12:02 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/19 18:49:30 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 /*
 	This function make necessary checks for the given arguments.
-	If there is no negative numbers, it converts them to integer in first if condition.
-	Second if checks whether the optional argument is given and positive.
-	Third if checks if second parameter(time to did_die) is zero. If so, philosopher will did_die right away.
-	Last if checks if there is only 1 philosopher. In this condition he will also did_die right away since
+	If there is no negative numbers, it converts them to integer in first 
+	if condition. Second if checks whether the optional argument is given
+	and positive. Third if checks if second parameter(time to did_die) is zero. 
+	If so, philosopher will did_die right away. Last if checks if there is 
+	only 1 philosopher. In this condition he will also did_die right away since
 	there isn't enough fork on the table.
 */
 int	ft_check(int argc, char **argv)
@@ -52,21 +53,21 @@ int	ft_check(int argc, char **argv)
 	like clockwise. Besides of that some values has been initialized
 	while looping thorough philosophers.
 */
-int	ft_initialize_sub2(int argc, char **argv, philoData *data)
+int	ft_initialize_sub2(int argc, char **argv, t_phi_data *data)
 {
-	philoData			*tmp;
-	philoData			*tmp2;
+	t_phi_data			*tmp;
+	t_phi_data			*tmp2;
 
 	tmp2 = data;
 	while (tmp2)
 	{
 		tmp = tmp2->next;
-		tmp2->dieTime = ft_atoi(argv[2]);
-		tmp2->eatTime = ft_atoi(argv[3]);
-		tmp2->sleepTime = ft_atoi(argv[4]);
-		tmp2->mustEat = 0;
+		tmp2->die_time = ft_atoi(argv[2]);
+		tmp2->eat_time = ft_atoi(argv[3]);
+		tmp2->sleep_time = ft_atoi(argv[4]);
+		tmp2->must_eat = 0;
 		if (argc == 6)
-			tmp2->mustEat = ft_atoi(argv[5]);
+			tmp2->must_eat = ft_atoi(argv[5]);
 		if (tmp == NULL)
 			tmp2->fork_l = data->fork_r;
 		else
@@ -82,24 +83,24 @@ int	ft_initialize_sub2(int argc, char **argv, philoData *data)
 	resource. Besides of that some values has been initialized
 	while looping thorough philosophers.
 */
-int	ft_initialize_sub(philoData *data, int k, int *did_die)
+int	ft_initialize_sub(t_phi_data *data, int k, int *did_die)
 {
-	philoData				*tmp;
-	int					i;
+	t_phi_data				*tmp;
+	int						i;
 
 	i = 0;
 	while (k > i++)
 	{
 		data->total_philo = k;
 		data->did_die = did_die;
-		data->index_philo = i;
+		data->index = i;
 		data->next = NULL;
 		data->fork_r = malloc(sizeof(pthread_mutex_t) * 1);
 		if (!data->fork_r || pthread_mutex_init(data->fork_r, 0))
 			return (1);
 		if (k == i)
 			break ;
-		tmp = malloc(sizeof(philoData) * 1);
+		tmp = malloc(sizeof(t_phi_data) * 1);
 		if (!tmp)
 			return (1);
 		data->next = tmp;
@@ -119,7 +120,7 @@ int	ft_initialize_sub(philoData *data, int k, int *did_die)
 	there would be a data race and some messages still would
 	be printed out to the terminal after somebody died.
 */
-int	ft_initialize_sub3(philoData *data)
+int	ft_initialize_sub3(t_phi_data *data)
 {
 	pthread_mutex_t		*funeral;
 	pthread_mutex_t		*tmp;
@@ -144,15 +145,15 @@ int	ft_initialize_sub3(philoData *data)
 	functions from above. The reason of that is to follow dictated
 	42 norms.
 */
-philoData	*ft_start(int argc, char **argv, int *did_die)
+t_phi_data	*ft_start(int argc, char **argv, int *did_die)
 {
-	int		k;
-	philoData	*data;
+	int			k;
+	t_phi_data	*data;
 
 	k = ft_check(argc, argv);
 	if (k < 1)
 		return (NULL);
-	data = malloc(sizeof(philoData) * 1);
+	data = malloc(sizeof(t_phi_data) * 1);
 	if (!data)
 		return (NULL);
 	if (ft_initialize_sub(data, k, did_die))

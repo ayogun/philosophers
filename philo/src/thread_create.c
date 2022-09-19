@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:26:43 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 12:10:51 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/19 18:49:12 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 	This function locks the forkRight and forkLeft mutexes.
 	After philosopher picked up both of the forks, he prints out
 	eating message and then eats(ft_sleep) as long as it has defined
-	by user and used in this program as eatTime.
+	by user and used in this program as eat_time.
 */
-void	ft_eat(philoData *data)
+void	ft_eat(t_phi_data *data)
 {
 	if (*data->did_die)
 		return ;
@@ -40,30 +40,30 @@ void	ft_eat(philoData *data)
 		return ;
 	}
 	ft_printf("\033[0;32mis eating\033[0m 🍔", data);
-	ft_sleep(data->eatTime);
+	ft_sleep(data->eat_time);
 	pthread_mutex_unlock(data->fork_l);
 	pthread_mutex_unlock(data->fork_r);
 }
 
 /*
-	This function works while the mustEat value is greater 
+	This function works while the must_eat value is greater 
 	than zero. Hence, we make sure that each philosopher eats
-	as much as mustEat parameters  which is given by user as 
+	as much as must_eat parameters  which is given by user as 
 	optional parameter. Whenever this value reaches the zero,
 	we lock the done_eat mutex and increase it by one. Done
 	vakue is initialized with zero and every philosopher increase
 	it only once wheen they are done with eating. In the final moment,
 	the done value will be equal to the total number of philosophers.
 */
-void	ft_musteat(philoData *data)
+void	ft_must_eat(t_phi_data *data)
 {
-	while (data->mustEat)
+	while (data->must_eat)
 	{
 		ft_eat(data);
 		if (*data->did_die)
 			return ;
-		data->mustEat--;
-		if (data->mustEat == 0)
+		data->must_eat--;
+		if (data->must_eat == 0)
 		{
 			pthread_mutex_lock(data->done_eat);
 			*data->done += 1;
@@ -71,7 +71,7 @@ void	ft_musteat(philoData *data)
 			return ;
 		}
 		ft_printf("\033[34;1mis sleeping\033[0m 😴", data);
-		ft_sleep(data->sleepTime);
+		ft_sleep(data->sleep_time);
 		ft_printf("\033[0;33mis thinking\033[0m 🤔", data);
 	}
 }
@@ -82,7 +82,7 @@ void	ft_musteat(philoData *data)
 	one of the philosophers' did_die value become 1. In this case,
 	while loop stops and function ends with void return.
 */
-void	ft_eat_forever(philoData *data)
+void	ft_eat_forever(t_phi_data *data)
 {
 	while (*data->did_die == 0)
 	{
@@ -90,7 +90,7 @@ void	ft_eat_forever(philoData *data)
 		ft_printf("\033[34;1mis sleeping\033[0m 😴", data);
 		if (*data->did_die)
 			return ;
-		ft_sleep(data->sleepTime);
+		ft_sleep(data->sleep_time);
 		ft_printf("\033[0;33mis thinking\033[0m 🤔", data);
 	}
 }
@@ -100,7 +100,7 @@ void	ft_eat_forever(philoData *data)
 	has been used in order to solve the philosophers
 	problem. It checks whether pihlosopher number is odd
 	or even. If it is odd, philosopher is being slept as
-	much as eatTime. Why? Because the reason, we try to
+	much as eat_time. Why? Because the reason, we try to
 	create enough time for even number philosophers to
 	complete eating. When even numbers completed eating,
 	odd numbers will continue to thread and forks will be
@@ -110,12 +110,12 @@ void	ft_eat_forever(philoData *data)
 	eat their meal in peace.
 	
 */
-void	ft_thread(philoData *data)
+void	ft_thread(t_phi_data *data)
 {
-	if (data->index_philo % 2 != 0)
-		usleep(data->eatTime * 100);
-	if (data->mustEat)
-		ft_musteat(data);
+	if (data->index % 2 != 0)
+		usleep(data->eat_time * 100);
+	if (data->must_eat)
+		ft_must_eat(data);
 	else
 		ft_eat_forever(data);
 }
@@ -125,9 +125,9 @@ void	ft_thread(philoData *data)
 	But most importantly, here in this function we create 
 	threads as many as the total number of philosophers.
 */
-void	ft_thread_create(philoData *data, int	*done)
+void	ft_thread_create(t_phi_data *data, int	*done)
 {
-	philoData				*tmp;
+	t_phi_data				*tmp;
 	struct timeval			*time1;
 
 	time1 = malloc(sizeof(struct timeval) * 1);

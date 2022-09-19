@@ -6,15 +6,15 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 22:57:26 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/18 11:27:49 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/19 18:47:31 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_free(philoData *data)
+void	ft_free(t_phi_data *data)
 {
-	philoData	*tmp;
+	t_phi_data	*tmp;
 
 	pthread_mutex_unlock(data->funeral);
 	pthread_mutex_destroy(data->funeral);
@@ -76,7 +76,7 @@ long unsigned int	ft_time(struct timeval *time)
 	return (i);
 }
 
-void	ft_printf(char *s, philoData *data)
+void	ft_printf(char *s, t_phi_data *data)
 {
 	long int	i;
 
@@ -87,7 +87,7 @@ void	ft_printf(char *s, philoData *data)
 		pthread_mutex_unlock(data->funeral);
 		return ;
 	}
-	printf("%lums - The philosopher number %i,  %s\n", i, data->index_philo, s);
+	printf("%lums - The philosopher number %i,  %s\n", i, data->index, s);
 	pthread_mutex_unlock(data->funeral);
 }
 
